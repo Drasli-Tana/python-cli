@@ -246,6 +246,7 @@ class Node:
         elif config_name == "paxcounter":
             p.set_module_config.paxcounter.CopyFrom(self.moduleConfig.paxcounter)
         elif config_name == "leo_router":
+            # @TODO: implement data sending
             raise NotImplementedError()
         else:
             our_exit(f"Error: No valid config with name {config_name}")
@@ -888,6 +889,8 @@ class Node:
         t.sat_fullname = tle["name"]
 
         m.is_test = tle["isTest"]
+        m.aperture = tle["aperture"]
+        m.gain = tle["gain"]
         
         """
         Present by default.
@@ -897,7 +900,7 @@ class Node:
         else:
             onResponse = self.onAckNak
 
-        self._sendAdmin()
+        #self._sendAdmin()
 
 
     def _fixupChannels(self):

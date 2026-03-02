@@ -1125,7 +1125,7 @@ def onConnected(interface):
 
             tle["isTest"] = args.tleTest
             tle["aperture"] = args.aperture
-
+            tle["gain"] = args.gain
 
             interface.getNode(args.dest, **getNode_kwargs).addTLE(tle)
             
@@ -2034,7 +2034,9 @@ def addLEOArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
     
     group.add_argument("--isTest", action="store_true", help="This tle is a test")
 
-    group.add_argument("--aperture", action="store",type=int)
+    group.add_argument("--aperture", action="store",type=int, default=180)
+
+    group.add_argument("--gain", action="store", type=int, default=0)
     
     return parser
 
