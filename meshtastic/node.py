@@ -245,6 +245,8 @@ class Node:
             p.set_module_config.ambient_lighting.CopyFrom(self.moduleConfig.ambient_lighting)
         elif config_name == "paxcounter":
             p.set_module_config.paxcounter.CopyFrom(self.moduleConfig.paxcounter)
+        elif config_name == "leo_router":
+            raise NotImplementedError()
         else:
             our_exit(f"Error: No valid config with name {config_name}")
 
@@ -862,6 +864,41 @@ class Node:
         else:
             onResponse = self.onAckNak
         return self._sendAdmin(p, onResponse=onResponse)
+    
+    def addTLE(self, tle):
+        self.ensureSessionKey()
+
+        p = leo_pb2.LEOConfig()
+        m = p.addreplace()
+        t = m.tle()
+        
+        t.N = tle["satNum"]
+        t.YE = tle["epochYear"]
+        t.TE = tle["epochDay"]
+        t.IN = tle["inclination"]
+        t.RA = tle["lna"]
+        t.EC = tle["eccentricity"]
+        t.WP = tle["argument"]
+        t.MA = tle["anomaly"]
+        t.MM = tle["motion"]
+        t.M2 = tle["m2"]
+        t.RV = tle["revolution"]
+
+        t.ES = tle["serial"]
+        t.sat_fullname = tle["name"]
+
+        m.is_test = tle["isTest"]
+        
+        """
+        Present by default.
+        """
+        if (self == self.ifacE.localNode):
+            onResponse = None
+        else:
+            onResponse = self.onAckNak
+
+        self._sendAdmin()
+
 
     def _fixupChannels(self):
         """Fixup indexes and add disabled channels as needed"""

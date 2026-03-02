@@ -1093,6 +1093,44 @@ def onConnected(interface):
         if log_set:
             log_set.close()
 
+        def parseTLE(data):
+            # Raises an exception when too many or too little data is found. 
+            # Might be a bit overkill as it could theorically support junk data
+            # at the end.
+            assert len(data) == 3
+
+            return {
+                "name": data[0][0:24],
+                "satNum": data[1][3:7],
+
+                "epochYear": data[1][18:20],
+                "epochDay": data[1][20:32],
+                "m2": data[1][33:43],
+                "serial": data[1][64:68],
+
+                "inclination" : data[2][8:16],
+                "lna" : data[2][17:25],
+                "eccentricity" : data[2][26:33],
+                "argument" : data[2][34:42],
+                "anomaly" : data[2][43:51],
+                "motion" : data[2][52:63],
+                "revolution" : data[2][63:68]
+            }
+
+        if args.tle:
+            with open(args.tle) as file:
+                data = file.readlines()
+            
+            tle = parseTLE([line.replace('\n', '') for line in data])
+
+            tle["isTest"] = args.tleTest
+            tle["aperture"] = args.aperture
+
+
+            interface.getNode(args.dest, **getNode_kwargs).addTLE(tle)
+            
+    
+
     except Exception as ex:
         print(f"Aborting due to: {ex}")
         interface.close()  # close the connection now, so that our app exits
@@ -1985,6 +2023,22 @@ def addRemoteAdminArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentPars
 
     return parser
 
+def addLEOArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
+
+    group =parser.add_argument_group(
+        "LEO options",
+        "Arguments to manage LEO TLEs."
+    )
+
+    group.add_argument("--tle", nargs=1, action="store", help="Path to file containing a TLE.")
+    
+    group.add_argument("--isTest", action="store_true", help="This tle is a test")
+
+    group.add_argument("--aperture", action="store",type=int)
+    
+    return parser
+
+
 def initParser():
     """Initialize the command line argument parsing."""
     parser = mt_config.parser
@@ -2024,6 +2078,8 @@ def initParser():
     # Arguments for sending or requesting things from the mesh
     parser = addRemoteActionArgs(parser)
     parser = addRemoteAdminArgs(parser)
+
+    parser = addLEOArgs(parser)
 
     # All the rest of the arguments
     group = parser.add_argument_group("Miscellaneous arguments")
