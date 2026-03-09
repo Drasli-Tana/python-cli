@@ -1127,7 +1127,21 @@ def onConnected(interface):
             tle["aperture"] = args.aperture
             tle["gain"] = args.gain
 
-            interface.getNode(args.dest, **getNode_kwargs).addTLE(tle)
+            p = LEOConfig(addreplace=tle)
+
+            node = interface.getNode(args.dest, **getNode_kwargs)
+            node.iface.sendData(
+                p,
+                node.nodeNum,
+                portNum=portnums_pb2.PortNum.LEOConfig,
+                wantAck=True,
+                wantResponse=wantResponse,
+                onResponse=onResponse,
+                channelIndex=adminIndex,
+                pkiEncrypted=True,
+            )
+
+            
             
     
 
@@ -2025,13 +2039,17 @@ def addRemoteAdminArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentPars
 
 def addLEOArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
 
-    group =parser.add_argument_group(
+    group = parser.add_argument_group(
         "LEO options",
         "Arguments to manage LEO TLEs."
     )
 
-    group.add_argument("--tle", nargs=1, action="store", help="Path to file containing a TLE.")
-    
+    msgType = group.add_mutually_exclusive_group()
+
+
+    msgType.add_argument("--tle", nargs=1, action="store", help="Path to file containing a TLE.")
+    msgType.add_argument("--deleteTLE", nargs=1, action="store", help="Catalogue number of a satellite to remove.")
+
     group.add_argument("--isTest", action="store_true", help="This tle is a test")
 
     group.add_argument("--aperture", action="store",type=int, default=180)

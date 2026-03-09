@@ -245,9 +245,6 @@ class Node:
             p.set_module_config.ambient_lighting.CopyFrom(self.moduleConfig.ambient_lighting)
         elif config_name == "paxcounter":
             p.set_module_config.paxcounter.CopyFrom(self.moduleConfig.paxcounter)
-        elif config_name == "leo_router":
-            # @TODO: implement data sending
-            raise NotImplementedError()
         else:
             our_exit(f"Error: No valid config with name {config_name}")
 
