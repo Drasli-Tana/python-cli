@@ -3,26 +3,26 @@
 isort:skip_file
 trunk-ignore(buf-lint/PACKAGE_DIRECTORY_MATCH)"""
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _Team:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _TeamEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Team.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TeamEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_Team.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     Unspecifed_Color: _Team.ValueType  # 0
     """
     Unspecifed
@@ -146,14 +146,14 @@ Brown: Team.ValueType  # 14
 """
 Brown
 """
-global___Team = Team
+Global___Team: _TypeAlias = Team  # noqa: Y015
 
 class _MemberRole:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _MemberRoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MemberRole.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _MemberRoleEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_MemberRole.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     Unspecifed: _MemberRole.ValueType  # 0
     """
     Unspecifed
@@ -232,58 +232,58 @@ K9: MemberRole.ValueType  # 8
 """
 Doggo
 """
-global___MemberRole = MemberRole
+Global___MemberRole: _TypeAlias = MemberRole  # noqa: Y015
 
-@typing.final
-class TAKPacket(google.protobuf.message.Message):
+@_typing.final
+class TAKPacket(_message.Message):
     """
     Packets for the official ATAK Plugin
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_COMPRESSED_FIELD_NUMBER: builtins.int
-    CONTACT_FIELD_NUMBER: builtins.int
-    GROUP_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
-    PLI_FIELD_NUMBER: builtins.int
-    CHAT_FIELD_NUMBER: builtins.int
-    DETAIL_FIELD_NUMBER: builtins.int
-    is_compressed: builtins.bool
+    IS_COMPRESSED_FIELD_NUMBER: _builtins.int
+    CONTACT_FIELD_NUMBER: _builtins.int
+    GROUP_FIELD_NUMBER: _builtins.int
+    STATUS_FIELD_NUMBER: _builtins.int
+    PLI_FIELD_NUMBER: _builtins.int
+    CHAT_FIELD_NUMBER: _builtins.int
+    DETAIL_FIELD_NUMBER: _builtins.int
+    is_compressed: _builtins.bool
     """
     Are the payloads strings compressed for LoRA transport?
     """
-    detail: builtins.bytes
+    detail: _builtins.bytes
     """
     Generic CoT detail XML
     May be compressed / truncated by the sender (EUD)
     """
-    @property
-    def contact(self) -> global___Contact:
+    @_builtins.property
+    def contact(self) -> Global___Contact:
         """
         The contact / callsign for ATAK user
         """
 
-    @property
-    def group(self) -> global___Group:
+    @_builtins.property
+    def group(self) -> Global___Group:
         """
         The group for ATAK user
         """
 
-    @property
-    def status(self) -> global___Status:
+    @_builtins.property
+    def status(self) -> Global___Status:
         """
         The status of the ATAK EUD
         """
 
-    @property
-    def pli(self) -> global___PLI:
+    @_builtins.property
+    def pli(self) -> Global___PLI:
         """
         TAK position report
         """
 
-    @property
-    def chat(self) -> global___GeoChat:
+    @_builtins.property
+    def chat(self) -> Global___GeoChat:
         """
         ATAK GeoChat message
         """
@@ -291,75 +291,85 @@ class TAKPacket(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        is_compressed: builtins.bool = ...,
-        contact: global___Contact | None = ...,
-        group: global___Group | None = ...,
-        status: global___Status | None = ...,
-        pli: global___PLI | None = ...,
-        chat: global___GeoChat | None = ...,
-        detail: builtins.bytes = ...,
+        is_compressed: _builtins.bool = ...,
+        contact: Global___Contact | None = ...,
+        group: Global___Group | None = ...,
+        status: Global___Status | None = ...,
+        pli: Global___PLI | None = ...,
+        chat: Global___GeoChat | None = ...,
+        detail: _builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["chat", b"chat", "contact", b"contact", "detail", b"detail", "group", b"group", "payload_variant", b"payload_variant", "pli", b"pli", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chat", b"chat", "contact", b"contact", "detail", b"detail", "group", b"group", "is_compressed", b"is_compressed", "payload_variant", b"payload_variant", "pli", b"pli", "status", b"status"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["payload_variant", b"payload_variant"]) -> typing.Literal["pli", "chat", "detail"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["chat", b"chat", "contact", b"contact", "detail", b"detail", "group", b"group", "payload_variant", b"payload_variant", "pli", b"pli", "status", b"status"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["chat", b"chat", "contact", b"contact", "detail", b"detail", "group", b"group", "is_compressed", b"is_compressed", "payload_variant", b"payload_variant", "pli", b"pli", "status", b"status"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_payload_variant: _TypeAlias = _typing.Literal["pli", "chat", "detail"]  # noqa: Y015
+    _WhichOneofArgType_payload_variant: _TypeAlias = _typing.Literal["payload_variant", b"payload_variant"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_payload_variant) -> _WhichOneofReturnType_payload_variant | None: ...
 
-global___TAKPacket = TAKPacket
+Global___TAKPacket: _TypeAlias = TAKPacket  # noqa: Y015
 
-@typing.final
-class GeoChat(google.protobuf.message.Message):
+@_typing.final
+class GeoChat(_message.Message):
     """
     ATAK GeoChat message
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MESSAGE_FIELD_NUMBER: builtins.int
-    TO_FIELD_NUMBER: builtins.int
-    TO_CALLSIGN_FIELD_NUMBER: builtins.int
-    message: builtins.str
+    MESSAGE_FIELD_NUMBER: _builtins.int
+    TO_FIELD_NUMBER: _builtins.int
+    TO_CALLSIGN_FIELD_NUMBER: _builtins.int
+    message: _builtins.str
     """
     The text message
     """
-    to: builtins.str
+    to: _builtins.str
     """
     Uid recipient of the message
     """
-    to_callsign: builtins.str
+    to_callsign: _builtins.str
     """
     Callsign of the recipient for the message
     """
     def __init__(
         self,
         *,
-        message: builtins.str = ...,
-        to: builtins.str | None = ...,
-        to_callsign: builtins.str | None = ...,
+        message: _builtins.str = ...,
+        to: _builtins.str | None = ...,
+        to_callsign: _builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_to", b"_to", "_to_callsign", b"_to_callsign", "to", b"to", "to_callsign", b"to_callsign"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_to", b"_to", "_to_callsign", b"_to_callsign", "message", b"message", "to", b"to", "to_callsign", b"to_callsign"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_to", b"_to"]) -> typing.Literal["to"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_to_callsign", b"_to_callsign"]) -> typing.Literal["to_callsign"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_to", b"_to", "_to_callsign", b"_to_callsign", "to", b"to", "to_callsign", b"to_callsign"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_to", b"_to", "_to_callsign", b"_to_callsign", "message", b"message", "to", b"to", "to_callsign", b"to_callsign"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__to: _TypeAlias = _typing.Literal["to"]  # noqa: Y015
+    _WhichOneofArgType__to: _TypeAlias = _typing.Literal["_to", b"_to"]  # noqa: Y015
+    _WhichOneofReturnType__to_callsign: _TypeAlias = _typing.Literal["to_callsign"]  # noqa: Y015
+    _WhichOneofArgType__to_callsign: _TypeAlias = _typing.Literal["_to_callsign", b"_to_callsign"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__to) -> _WhichOneofReturnType__to | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__to_callsign) -> _WhichOneofReturnType__to_callsign | None: ...
 
-global___GeoChat = GeoChat
+Global___GeoChat: _TypeAlias = GeoChat  # noqa: Y015
 
-@typing.final
-class Group(google.protobuf.message.Message):
+@_typing.final
+class Group(_message.Message):
     """
     ATAK Group
     <__group role='Team Member' name='Cyan'/>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ROLE_FIELD_NUMBER: builtins.int
-    TEAM_FIELD_NUMBER: builtins.int
-    role: global___MemberRole.ValueType
+    ROLE_FIELD_NUMBER: _builtins.int
+    TEAM_FIELD_NUMBER: _builtins.int
+    role: Global___MemberRole.ValueType
     """
     Role of the group member
     """
-    team: global___Team.ValueType
+    team: Global___Team.ValueType
     """
     Team (color)
     Default Cyan
@@ -367,52 +377,54 @@ class Group(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        role: global___MemberRole.ValueType = ...,
-        team: global___Team.ValueType = ...,
+        role: Global___MemberRole.ValueType = ...,
+        team: Global___Team.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["role", b"role", "team", b"team"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["role", b"role", "team", b"team"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Group = Group
+Global___Group: _TypeAlias = Group  # noqa: Y015
 
-@typing.final
-class Status(google.protobuf.message.Message):
+@_typing.final
+class Status(_message.Message):
     """
     ATAK EUD Status
     <status battery='100' />
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    BATTERY_FIELD_NUMBER: builtins.int
-    battery: builtins.int
+    BATTERY_FIELD_NUMBER: _builtins.int
+    battery: _builtins.int
     """
     Battery level
     """
     def __init__(
         self,
         *,
-        battery: builtins.int = ...,
+        battery: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["battery", b"battery"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["battery", b"battery"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Status = Status
+Global___Status: _TypeAlias = Status  # noqa: Y015
 
-@typing.final
-class Contact(google.protobuf.message.Message):
+@_typing.final
+class Contact(_message.Message):
     """
     ATAK Contact
     <contact endpoint='0.0.0.0:4242:tcp' phone='+12345678' callsign='FALKE'/>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CALLSIGN_FIELD_NUMBER: builtins.int
-    DEVICE_CALLSIGN_FIELD_NUMBER: builtins.int
-    callsign: builtins.str
+    CALLSIGN_FIELD_NUMBER: _builtins.int
+    DEVICE_CALLSIGN_FIELD_NUMBER: _builtins.int
+    callsign: _builtins.str
     """
     Callsign
     """
-    device_callsign: builtins.str
+    device_callsign: _builtins.str
     """
     Device callsign
 
@@ -421,57 +433,59 @@ class Contact(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        callsign: builtins.str = ...,
-        device_callsign: builtins.str = ...,
+        callsign: _builtins.str = ...,
+        device_callsign: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["callsign", b"callsign", "device_callsign", b"device_callsign"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["callsign", b"callsign", "device_callsign", b"device_callsign"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Contact = Contact
+Global___Contact: _TypeAlias = Contact  # noqa: Y015
 
-@typing.final
-class PLI(google.protobuf.message.Message):
+@_typing.final
+class PLI(_message.Message):
     """
     Position Location Information from ATAK
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LATITUDE_I_FIELD_NUMBER: builtins.int
-    LONGITUDE_I_FIELD_NUMBER: builtins.int
-    ALTITUDE_FIELD_NUMBER: builtins.int
-    SPEED_FIELD_NUMBER: builtins.int
-    COURSE_FIELD_NUMBER: builtins.int
-    latitude_i: builtins.int
+    LATITUDE_I_FIELD_NUMBER: _builtins.int
+    LONGITUDE_I_FIELD_NUMBER: _builtins.int
+    ALTITUDE_FIELD_NUMBER: _builtins.int
+    SPEED_FIELD_NUMBER: _builtins.int
+    COURSE_FIELD_NUMBER: _builtins.int
+    latitude_i: _builtins.int
     """
     The new preferred location encoding, multiply by 1e-7 to get degrees
     in floating point
     """
-    longitude_i: builtins.int
+    longitude_i: _builtins.int
     """
     The new preferred location encoding, multiply by 1e-7 to get degrees
     in floating point
     """
-    altitude: builtins.int
+    altitude: _builtins.int
     """
     Altitude (ATAK prefers HAE)
     """
-    speed: builtins.int
+    speed: _builtins.int
     """
     Speed
     """
-    course: builtins.int
+    course: _builtins.int
     """
     Course in degrees
     """
     def __init__(
         self,
         *,
-        latitude_i: builtins.int = ...,
-        longitude_i: builtins.int = ...,
-        altitude: builtins.int = ...,
-        speed: builtins.int = ...,
-        course: builtins.int = ...,
+        latitude_i: _builtins.int = ...,
+        longitude_i: _builtins.int = ...,
+        altitude: _builtins.int = ...,
+        speed: _builtins.int = ...,
+        course: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["altitude", b"altitude", "course", b"course", "latitude_i", b"latitude_i", "longitude_i", b"longitude_i", "speed", b"speed"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["altitude", b"altitude", "course", b"course", "latitude_i", b"latitude_i", "longitude_i", b"longitude_i", "speed", b"speed"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___PLI = PLI
+Global___PLI: _TypeAlias = PLI  # noqa: Y015
