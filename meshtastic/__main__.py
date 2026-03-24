@@ -1137,7 +1137,7 @@ def onConnected(interface):
             # }
 
         if args.tle:
-            with open(args.tle[0], "r", encoding="utf-8") as file:
+            with open(args.tle, "r", encoding="utf-8") as file:
                 data = file.readlines()
             
             data2 = [line.replace('\n', '') for line in data]
@@ -1148,12 +1148,12 @@ def onConnected(interface):
             for i in range(len(data2)//3):
                 tlen = parseTLE(data2, i)
 
-                if args.aperture:
-                    tlen["aperture"] = int(args.aperture)
-                if args.gain:
-                    tlen["gain"] = float(args.gain)
-
-                addm = leo_pb2.LEOConfig.TLEAddReplace(is_test=args.isTest,tle=tlen)
+                addm = leo_pb2.LEOConfig.TLEAddReplace(
+                    is_test=args.isTest,
+                    tle=tlen,
+                    aperture=int(args.aperture),
+                    gain=float(args.gain)
+                )
 
                 p = leo_pb2.LEOConfig(addreplace=addm)
                 
@@ -1164,10 +1164,8 @@ def onConnected(interface):
                     portNum=portnums_pb2.PortNum.LEO_APP,
                     channelIndex=channelIndex,
                 )
-
-            
-            
-    
+        if args.deleteTLE:
+            print("Should be removing a TLE, not yet implemented")
 
     except Exception as ex:
         print(f"Aborting due to: {ex}")
@@ -2071,10 +2069,10 @@ def addLEOArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
     msgType = group.add_mutually_exclusive_group()
 
 
-    msgType.add_argument("--tle", nargs=1, action="store", help="Path to file containing a TLE.")
-    msgType.add_argument("--deleteTLE", nargs=1, action="store", help="Catalogue number of a satellite to remove.")
+    msgType.add_argument("--tle", action="store", help="Path to file containing a TLE.")
+    msgType.add_argument("--deleteTLE", action="store", help="Catalogue number of a satellite to remove.")
 
-    group.add_argument("--isTest", action="store_true", help="This tle is a test")
+    group.add_argument("--isTest", action="store_true", help="Theses tle are a test")
 
     group.add_argument("--aperture", action="store",type=int, default=180)
 
