@@ -60,7 +60,7 @@ except ImportError as e:
     have_powermon = False
     powermon_exception = e
     meter = None
-from meshtastic.protobuf import channel_pb2, config_pb2, portnums_pb2, mesh_pb2
+from meshtastic.protobuf import channel_pb2, config_pb2, portnums_pb2, mesh_pb2, leo_pb2
 from meshtastic.version import get_active_version
 
 logger = logging.getLogger(__name__)
@@ -1093,6 +1093,62 @@ def onConnected(interface):
         if log_set:
             log_set.close()
 
+        def parseTLE(data, offset = 0):
+            # Raises an exception when too many or too little data is found.
+            # Might be a bit overkill as it could theorically support junk data
+            # at the end.
+            lineOff = 3*offset
+            assert len(data) - (lineOff) >= 3
+
+            return {
+                "sat_fullname": data[lineOff][0:24],
+                "N": int(data[lineOff+1][3:7]),
+
+                "YE": int(data[lineOff+1][18:20]),
+                "TE": float(data[lineOff+1][20:32]),
+                "M2": float(data[lineOff+1][33:43]),
+                "ES": int(data[lineOff+1][64:68]),
+
+                "IN" : float(data[lineOff+2][8:16]),
+                "RA" : float(data[lineOff+2][17:25]),
+                "EC" : float(data[lineOff+2][26:33]),
+                "WP" : float(data[lineOff+2][34:42]),
+                "MA" : float(data[lineOff+2][43:51]),
+                "MM" : float(data[lineOff+2][52:63]),
+                "RV" : int(data[lineOff+2][63:68])
+            }
+
+        if args.tle:
+            with open(args.tle, "r", encoding="utf-8") as file:
+                data = file.readlines()
+
+            data2 = [line.replace('\n', '') for line in data]
+
+            node = interface.getNode(args.dest, **getNode_kwargs)
+            channelIndex = mt_config.channel_index or 0
+
+            for i in range(len(data2)//3):
+                tlen = parseTLE(data2, i)
+
+                addm = leo_pb2.LEOConfig.TLEAddReplace(
+                    is_test=args.isTest,
+                    tle=tlen,
+                    aperture=int(args.aperture),
+                    gain=float(args.gain)
+                )
+
+                p = leo_pb2.LEOConfig(addreplace=addm)
+
+                node.iface.sendData(
+                    p,
+                    #node.nodeNum,
+                    destinationId=args.dest,
+                    portNum=portnums_pb2.PortNum.LEO_APP,
+                    channelIndex=channelIndex,
+                )
+        if args.deleteTLE:
+            print("Should be removing a TLE, not yet implemented")
+
     except Exception as ex:
         print(f"Aborting due to: {ex}")
         interface.close()  # close the connection now, so that our app exits
@@ -1985,6 +2041,31 @@ def addRemoteAdminArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentPars
 
     return parser
 
+def addLEOArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
+    """
+    Adds LEO-relay related arguments to the CLI
+    """
+
+    group = parser.add_argument_group(
+        "LEO options",
+        "Arguments to manage LEO TLEs."
+    )
+
+    msgType = group.add_mutually_exclusive_group()
+
+
+    msgType.add_argument("--tle", action="store", help="Path to file containing a TLE.")
+    msgType.add_argument("--deleteTLE", action="store", help="Catalogue number of a satellite to remove.")
+
+    group.add_argument("--isTest", action="store_true", help="Theses tle are a test")
+
+    group.add_argument("--aperture", action="store",type=int, default=180)
+
+    group.add_argument("--gain", action="store", type=int, default=0)
+
+    return parser
+
+
 def initParser():
     """Initialize the command line argument parsing."""
     parser = mt_config.parser
@@ -2024,6 +2105,8 @@ def initParser():
     # Arguments for sending or requesting things from the mesh
     parser = addRemoteActionArgs(parser)
     parser = addRemoteAdminArgs(parser)
+
+    parser = addLEOArgs(parser)
 
     # All the rest of the arguments
     group = parser.add_argument_group("Miscellaneous arguments")

@@ -232,6 +232,10 @@ class AdminMessage(google.protobuf.message.Message):
         """
         Traffic management module config
         """
+        LEO_CONFIG: AdminMessage._ModuleConfigType.ValueType  # 15
+        """
+        Editing the TLE database for low-orbit routing.
+        """
 
     class ModuleConfigType(_ModuleConfigType, metaclass=_ModuleConfigTypeEnumTypeWrapper):
         """
@@ -297,6 +301,10 @@ class AdminMessage(google.protobuf.message.Message):
     TRAFFICMANAGEMENT_CONFIG: AdminMessage.ModuleConfigType.ValueType  # 14
     """
     Traffic management module config
+    """
+    LEO_CONFIG: AdminMessage.ModuleConfigType.ValueType  # 15
+    """
+    Editing the TLE database for low-orbit routing.
     """
 
     class _BackupLocation:

@@ -219,6 +219,10 @@ class _PortNumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTy
     ATAK Forwarder Module https://github.com/paulmandal/atak-forwarder
     ENCODING: libcotshrink
     """
+    LEO_APP: _PortNum.ValueType  # 384
+    """
+    LEO config message
+    """
     MAX: _PortNum.ValueType  # 511
     """
     Currently we limit port nums to no higher than this value
@@ -436,6 +440,10 @@ ATAK_FORWARDER: PortNum.ValueType  # 257
 """
 ATAK Forwarder Module https://github.com/paulmandal/atak-forwarder
 ENCODING: libcotshrink
+"""
+LEO_APP: PortNum.ValueType  # 384
+"""
+LEO config message
 """
 MAX: PortNum.ValueType  # 511
 """
