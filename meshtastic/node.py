@@ -862,43 +862,6 @@ class Node:
         else:
             onResponse = self.onAckNak
         return self._sendAdmin(p, onResponse=onResponse)
-    
-    def addTLE(self, tle):
-        self.ensureSessionKey()
-
-        p = leo_pb2.LEOConfig()
-        m = p.addreplace()
-        t = m.tle()
-        
-        t.N = tle["satNum"]
-        t.YE = tle["epochYear"]
-        t.TE = tle["epochDay"]
-        t.IN = tle["inclination"]
-        t.RA = tle["lna"]
-        t.EC = tle["eccentricity"]
-        t.WP = tle["argument"]
-        t.MA = tle["anomaly"]
-        t.MM = tle["motion"]
-        t.M2 = tle["m2"]
-        t.RV = tle["revolution"]
-
-        t.ES = tle["serial"]
-        t.sat_fullname = tle["name"]
-
-        m.is_test = tle["isTest"]
-        m.aperture = tle["aperture"]
-        m.gain = tle["gain"]
-        
-        """
-        Present by default.
-        """
-        if (self == self.ifacE.localNode):
-            onResponse = None
-        else:
-            onResponse = self.onAckNak
-
-        #self._sendAdmin()
-
 
     def _fixupChannels(self):
         """Fixup indexes and add disabled channels as needed"""
