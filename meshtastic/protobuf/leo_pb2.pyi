@@ -3,155 +3,141 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-import builtins as _builtins
-import sys
-import typing as _typing
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.message
+import typing
 
-if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
-else:
-    from typing_extensions import TypeAlias as _TypeAlias
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-DESCRIPTOR: _descriptor.FileDescriptor
-
-@_typing.final
-class TLE(_message.Message):
+@typing.final
+class TLE(google.protobuf.message.Message):
     """*
     @brief Compact representation of TLE (Two-line element set)
     https://en.wikipedia.org/wiki/Two-line_element_set
     Satelitte position can be predicted using the AioP13 library https://github.com/dl9sec/AioP13
     """
 
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    N_FIELD_NUMBER: _builtins.int
-    YE_FIELD_NUMBER: _builtins.int
-    TE_FIELD_NUMBER: _builtins.int
-    IN_FIELD_NUMBER: _builtins.int
-    RA_FIELD_NUMBER: _builtins.int
-    EC_FIELD_NUMBER: _builtins.int
-    WP_FIELD_NUMBER: _builtins.int
-    MA_FIELD_NUMBER: _builtins.int
-    MM_FIELD_NUMBER: _builtins.int
-    M2_FIELD_NUMBER: _builtins.int
-    RV_FIELD_NUMBER: _builtins.int
-    ES_FIELD_NUMBER: _builtins.int
-    SAT_FULLNAME_FIELD_NUMBER: _builtins.int
-    CONSTELLATION_ID_FIELD_NUMBER: _builtins.int
-    LAST_UPDATE_TIME_FIELD_NUMBER: _builtins.int
-    N: _builtins.int
+    N_FIELD_NUMBER: builtins.int
+    YE_FIELD_NUMBER: builtins.int
+    TE_FIELD_NUMBER: builtins.int
+    IN_FIELD_NUMBER: builtins.int
+    RA_FIELD_NUMBER: builtins.int
+    EC_FIELD_NUMBER: builtins.int
+    WP_FIELD_NUMBER: builtins.int
+    MA_FIELD_NUMBER: builtins.int
+    MM_FIELD_NUMBER: builtins.int
+    M2_FIELD_NUMBER: builtins.int
+    RV_FIELD_NUMBER: builtins.int
+    ES_FIELD_NUMBER: builtins.int
+    SAT_FULLNAME_FIELD_NUMBER: builtins.int
+    CONSTELLATION_ID_FIELD_NUMBER: builtins.int
+    LAST_UPDATE_TIME_FIELD_NUMBER: builtins.int
+    N: builtins.int
     """Satellite catalog number from tle:l1:2..6"""
-    YE: _builtins.int
+    YE: builtins.int
     """Epoch year from tle:l1:18..19    														year"""
-    TE: _builtins.float
+    TE: builtins.float
     """Epoch (day of the year and fractional portion of the day) from tle:l1:20..31    			days"""
-    IN: _builtins.float
+    IN: builtins.float
     """Inclination (degrees) from tle:l2:8..15"""
-    RA: _builtins.float
+    RA: builtins.float
     """R.A.A.N (degrees) from tle:l2:17..24      												deg"""
-    EC: _builtins.float
+    EC: builtins.float
     """Eccentricity from tle:l2:26..32  			 											-"""
-    WP: _builtins.float
+    WP: builtins.float
     """Get argument of perigee (degrees) from tle:l2:34..41   			deg"""
-    MA: _builtins.float
+    MA: builtins.float
     """Mean anomaly (degrees) from tle:l2:43..50  			deg"""
-    MM: _builtins.float
+    MM: builtins.float
     """Mean motion from tle:l2:52..62   			rev/d"""
-    M2: _builtins.float
+    M2: builtins.float
     """First time derivative of the mean motion divided by to from tle:l1:33..42    			rev/d/d"""
-    RV: _builtins.int
+    RV: builtins.int
     """Revolution number at epoch (revolutions) from tle:l2:63..67  			 				-"""
-    ES: _builtins.int
+    ES: builtins.int
     """*
     @brief Element set number. Incremented when a new TLE is generated for this object from tle:l1:64..67
     @note ES is used as version number.
 
     Element set number. Incremented when a new TLE is generated for this object from tle:l1:64..67
     """
-    sat_fullname: _builtins.str
+    sat_fullname: builtins.str
     """*
     @brief (human-readable) Full name
     """
-    constellation_id: _builtins.int
+    constellation_id: builtins.int
     """*
     @brief Constellation id (for future use) : the constellation contains a LoRaConfig message
     """
-    last_update_time: _builtins.int
+    last_update_time: builtins.int
     """*
     @brief Unix-epoch time of the last update of the TLE (for the TLE DB)
     """
     def __init__(
         self,
         *,
-        N: _builtins.int = ...,
-        YE: _builtins.int = ...,
-        TE: _builtins.float = ...,
-        IN: _builtins.float = ...,
-        RA: _builtins.float = ...,
-        EC: _builtins.float = ...,
-        WP: _builtins.float = ...,
-        MA: _builtins.float = ...,
-        MM: _builtins.float = ...,
-        M2: _builtins.float = ...,
-        RV: _builtins.int = ...,
-        ES: _builtins.int = ...,
-        sat_fullname: _builtins.str | None = ...,
-        constellation_id: _builtins.int | None = ...,
-        last_update_time: _builtins.int | None = ...,
+        N: builtins.int = ...,
+        YE: builtins.int = ...,
+        TE: builtins.float = ...,
+        IN: builtins.float = ...,
+        RA: builtins.float = ...,
+        EC: builtins.float = ...,
+        WP: builtins.float = ...,
+        MA: builtins.float = ...,
+        MM: builtins.float = ...,
+        M2: builtins.float = ...,
+        RV: builtins.int = ...,
+        ES: builtins.int = ...,
+        sat_fullname: builtins.str | None = ...,
+        constellation_id: builtins.int | None = ...,
+        last_update_time: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["_constellation_id", b"_constellation_id", "_last_update_time", b"_last_update_time", "_sat_fullname", b"_sat_fullname", "constellation_id", b"constellation_id", "last_update_time", b"last_update_time", "sat_fullname", b"sat_fullname"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["EC", b"EC", "ES", b"ES", "IN", b"IN", "M2", b"M2", "MA", b"MA", "MM", b"MM", "N", b"N", "RA", b"RA", "RV", b"RV", "TE", b"TE", "WP", b"WP", "YE", b"YE", "_constellation_id", b"_constellation_id", "_last_update_time", b"_last_update_time", "_sat_fullname", b"_sat_fullname", "constellation_id", b"constellation_id", "last_update_time", b"last_update_time", "sat_fullname", b"sat_fullname"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType__constellation_id: _TypeAlias = _typing.Literal["constellation_id"]  # noqa: Y015
-    _WhichOneofArgType__constellation_id: _TypeAlias = _typing.Literal["_constellation_id", b"_constellation_id"]  # noqa: Y015
-    _WhichOneofReturnType__last_update_time: _TypeAlias = _typing.Literal["last_update_time"]  # noqa: Y015
-    _WhichOneofArgType__last_update_time: _TypeAlias = _typing.Literal["_last_update_time", b"_last_update_time"]  # noqa: Y015
-    _WhichOneofReturnType__sat_fullname: _TypeAlias = _typing.Literal["sat_fullname"]  # noqa: Y015
-    _WhichOneofArgType__sat_fullname: _TypeAlias = _typing.Literal["_sat_fullname", b"_sat_fullname"]  # noqa: Y015
-    @_typing.overload
-    def WhichOneof(self, oneof_group: _WhichOneofArgType__constellation_id) -> _WhichOneofReturnType__constellation_id | None: ...
-    @_typing.overload
-    def WhichOneof(self, oneof_group: _WhichOneofArgType__last_update_time) -> _WhichOneofReturnType__last_update_time | None: ...
-    @_typing.overload
-    def WhichOneof(self, oneof_group: _WhichOneofArgType__sat_fullname) -> _WhichOneofReturnType__sat_fullname | None: ...
+    def HasField(self, field_name: typing.Literal["_constellation_id", b"_constellation_id", "_last_update_time", b"_last_update_time", "_sat_fullname", b"_sat_fullname", "constellation_id", b"constellation_id", "last_update_time", b"last_update_time", "sat_fullname", b"sat_fullname"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["EC", b"EC", "ES", b"ES", "IN", b"IN", "M2", b"M2", "MA", b"MA", "MM", b"MM", "N", b"N", "RA", b"RA", "RV", b"RV", "TE", b"TE", "WP", b"WP", "YE", b"YE", "_constellation_id", b"_constellation_id", "_last_update_time", b"_last_update_time", "_sat_fullname", b"_sat_fullname", "constellation_id", b"constellation_id", "last_update_time", b"last_update_time", "sat_fullname", b"sat_fullname"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_constellation_id", b"_constellation_id"]) -> typing.Literal["constellation_id"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_last_update_time", b"_last_update_time"]) -> typing.Literal["last_update_time"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_sat_fullname", b"_sat_fullname"]) -> typing.Literal["sat_fullname"] | None: ...
 
-Global___TLE: _TypeAlias = TLE  # noqa: Y015
+global___TLE = TLE
 
-@_typing.final
-class LEOConfig(_message.Message):
+@typing.final
+class LEOConfig(google.protobuf.message.Message):
     """
     For LEO module configuration
     The configuration can be broadcasted into Mesh messages by the satellite/terrestrial mesh networks.
     Note Bene: the TLE is replaced only with a newer TLE (ie higher ES)
     """
 
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class TLEAddReplace(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class TLEAddReplace(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        IS_TEST_FIELD_NUMBER: _builtins.int
-        TLE_FIELD_NUMBER: _builtins.int
-        APERTURE_FIELD_NUMBER: _builtins.int
-        GAIN_FIELD_NUMBER: _builtins.int
-        is_test: _builtins.bool
+        IS_TEST_FIELD_NUMBER: builtins.int
+        TLE_FIELD_NUMBER: builtins.int
+        APERTURE_FIELD_NUMBER: builtins.int
+        GAIN_FIELD_NUMBER: builtins.int
+        is_test: builtins.bool
         """
         Is a TLE for test
         """
-        aperture: _builtins.int
+        aperture: builtins.int
         """
         Satellite antenna aperture (in degree)
         """
-        gain: _builtins.float
+        gain: builtins.float
         """
         Satellite antenna gain (in dBi)
         """
-        @_builtins.property
-        def tle(self) -> Global___TLE:
+        @property
+        def tle(self) -> global___TLE:
             """
             TLE of a satellite to add or to replace
             """
@@ -159,30 +145,24 @@ class LEOConfig(_message.Message):
         def __init__(
             self,
             *,
-            is_test: _builtins.bool = ...,
-            tle: Global___TLE | None = ...,
-            aperture: _builtins.int | None = ...,
-            gain: _builtins.float | None = ...,
+            is_test: builtins.bool = ...,
+            tle: global___TLE | None = ...,
+            aperture: builtins.int | None = ...,
+            gain: builtins.float | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["_aperture", b"_aperture", "_gain", b"_gain", "aperture", b"aperture", "gain", b"gain", "tle", b"tle"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["_aperture", b"_aperture", "_gain", b"_gain", "aperture", b"aperture", "gain", b"gain", "is_test", b"is_test", "tle", b"tle"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        _WhichOneofReturnType__aperture: _TypeAlias = _typing.Literal["aperture"]  # noqa: Y015
-        _WhichOneofArgType__aperture: _TypeAlias = _typing.Literal["_aperture", b"_aperture"]  # noqa: Y015
-        _WhichOneofReturnType__gain: _TypeAlias = _typing.Literal["gain"]  # noqa: Y015
-        _WhichOneofArgType__gain: _TypeAlias = _typing.Literal["_gain", b"_gain"]  # noqa: Y015
-        @_typing.overload
-        def WhichOneof(self, oneof_group: _WhichOneofArgType__aperture) -> _WhichOneofReturnType__aperture | None: ...
-        @_typing.overload
-        def WhichOneof(self, oneof_group: _WhichOneofArgType__gain) -> _WhichOneofReturnType__gain | None: ...
+        def HasField(self, field_name: typing.Literal["_aperture", b"_aperture", "_gain", b"_gain", "aperture", b"aperture", "gain", b"gain", "tle", b"tle"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["_aperture", b"_aperture", "_gain", b"_gain", "aperture", b"aperture", "gain", b"gain", "is_test", b"is_test", "tle", b"tle"]) -> None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_aperture", b"_aperture"]) -> typing.Literal["aperture"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_gain", b"_gain"]) -> typing.Literal["gain"] | None: ...
 
-    @_typing.final
-    class TLERemove(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class TLERemove(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        N_FIELD_NUMBER: _builtins.int
-        N: _builtins.int
+        N_FIELD_NUMBER: builtins.int
+        N: builtins.int
         """
         TLE of a satellite to remove
         Satellite catalog number from tle:l1:2..6
@@ -190,42 +170,35 @@ class LEOConfig(_message.Message):
         def __init__(
             self,
             *,
-            N: _builtins.int = ...,
+            N: builtins.int = ...,
         ) -> None: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["N", b"N"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def ClearField(self, field_name: typing.Literal["N", b"N"]) -> None: ...
 
-    ADDREPLACE_FIELD_NUMBER: _builtins.int
-    REMOVE_FIELD_NUMBER: _builtins.int
-    SIGNATURE_FIELD_NUMBER: _builtins.int
-    signature: _builtins.bytes
+    ADDREPLACE_FIELD_NUMBER: builtins.int
+    REMOVE_FIELD_NUMBER: builtins.int
+    SIGNATURE_FIELD_NUMBER: builtins.int
+    signature: builtins.bytes
     """
     The digital signature of the config operation when it is broadcasted by satellite.
     Lenght depends of the Digital Signature Algorithm (64 bytes for EC25519)
     See Remote Admin module https://meshtastic.org/docs/configuration/remote-admin/
     """
-    @_builtins.property
-    def addreplace(self) -> Global___LEOConfig.TLEAddReplace: ...
-    @_builtins.property
-    def remove(self) -> Global___LEOConfig.TLERemove: ...
+    @property
+    def addreplace(self) -> global___LEOConfig.TLEAddReplace: ...
+    @property
+    def remove(self) -> global___LEOConfig.TLERemove: ...
     def __init__(
         self,
         *,
-        addreplace: Global___LEOConfig.TLEAddReplace | None = ...,
-        remove: Global___LEOConfig.TLERemove | None = ...,
-        signature: _builtins.bytes | None = ...,
+        addreplace: global___LEOConfig.TLEAddReplace | None = ...,
+        remove: global___LEOConfig.TLERemove | None = ...,
+        signature: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["_signature", b"_signature", "action", b"action", "addreplace", b"addreplace", "remove", b"remove", "signature", b"signature"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["_signature", b"_signature", "action", b"action", "addreplace", b"addreplace", "remove", b"remove", "signature", b"signature"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType__signature: _TypeAlias = _typing.Literal["signature"]  # noqa: Y015
-    _WhichOneofArgType__signature: _TypeAlias = _typing.Literal["_signature", b"_signature"]  # noqa: Y015
-    _WhichOneofReturnType_action: _TypeAlias = _typing.Literal["addreplace", "remove"]  # noqa: Y015
-    _WhichOneofArgType_action: _TypeAlias = _typing.Literal["action", b"action"]  # noqa: Y015
-    @_typing.overload
-    def WhichOneof(self, oneof_group: _WhichOneofArgType__signature) -> _WhichOneofReturnType__signature | None: ...
-    @_typing.overload
-    def WhichOneof(self, oneof_group: _WhichOneofArgType_action) -> _WhichOneofReturnType_action | None: ...
+    def HasField(self, field_name: typing.Literal["_signature", b"_signature", "action", b"action", "addreplace", b"addreplace", "remove", b"remove", "signature", b"signature"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_signature", b"_signature", "action", b"action", "addreplace", b"addreplace", "remove", b"remove", "signature", b"signature"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_signature", b"_signature"]) -> typing.Literal["signature"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["action", b"action"]) -> typing.Literal["addreplace", "remove"] | None: ...
 
-Global___LEOConfig: _TypeAlias = LEOConfig  # noqa: Y015
+global___LEOConfig = LEOConfig
