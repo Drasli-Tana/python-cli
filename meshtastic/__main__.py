@@ -1121,7 +1121,7 @@ def onConnected(interface):
         if args.tle:
             with open(args.tle, "r", encoding="utf-8") as file:
                 data = file.readlines()
-            
+
             data2 = [line.replace('\n', '') for line in data]
 
             node = interface.getNode(args.dest, **getNode_kwargs)
@@ -1138,7 +1138,7 @@ def onConnected(interface):
                 )
 
                 p = leo_pb2.LEOConfig(addreplace=addm)
- 
+
                 node.iface.sendData(
                     p,
                     #node.nodeNum,
@@ -2042,6 +2042,9 @@ def addRemoteAdminArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentPars
     return parser
 
 def addLEOArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
+    """
+    Adds LEO-relay related arguments to the CLI
+    """
 
     group = parser.add_argument_group(
         "LEO options",
@@ -2059,7 +2062,7 @@ def addLEOArgs(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
     group.add_argument("--aperture", action="store",type=int, default=180)
 
     group.add_argument("--gain", action="store", type=int, default=0)
-    
+
     return parser
 
 
