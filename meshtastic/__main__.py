@@ -1094,12 +1094,11 @@ def onConnected(interface):
             log_set.close()
 
         def parseTLE(data, offset = 0):
-            # Raises an exception when too many or too little data is found. 
+            # Raises an exception when too many or too little data is found.
             # Might be a bit overkill as it could theorically support junk data
             # at the end.
             lineOff = 3*offset
             assert len(data) - (lineOff) >= 3
-
 
             return {
                 "sat_fullname": data[lineOff][0:24],
@@ -1118,23 +1117,6 @@ def onConnected(interface):
                 "MM" : float(data[lineOff+2][52:63]),
                 "RV" : int(data[lineOff+2][63:68])
             }
-            # return {
-            #     "name": data[0][0:24],
-            #     "satNum": data[1][3:7],
-
-            #     "epochYear": data[1][18:20],
-            #     "epochDay": data[1][20:32],
-            #     "m2": data[1][33:43],
-            #     "serial": data[1][64:68],
-
-            #     "inclination" : data[2][8:16],
-            #     "lna" : data[2][17:25],
-            #     "eccentricity" : data[2][26:33],
-            #     "argument" : data[2][34:42],
-            #     "anomaly" : data[2][43:51],
-            #     "motion" : data[2][52:63],
-            #     "revolution" : data[2][63:68]
-            # }
 
         if args.tle:
             with open(args.tle, "r", encoding="utf-8") as file:
@@ -1156,7 +1138,7 @@ def onConnected(interface):
                 )
 
                 p = leo_pb2.LEOConfig(addreplace=addm)
-                
+ 
                 node.iface.sendData(
                     p,
                     #node.nodeNum,
